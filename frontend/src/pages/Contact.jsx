@@ -35,8 +35,8 @@ const Contact = () => {
           <div className="bg-brand-light p-8 rounded-2xl border border-brand-secondary/50">
             <h3 className="text-xl font-bold text-brand-dark mb-2">Direct Contact</h3>
             <p className="text-brand-text mb-2"><strong>Email:</strong> hello@unfoldjoy.com</p>
-            <p className="text-brand-text mb-4"><strong>Phone:</strong> +91 98765 43210</p>
-            <a href="https://wa.me/919876543210" className="inline-block bg-green-500 text-white font-bold px-6 py-2 rounded-md hover:bg-green-600 transition-colors">
+            <p className="text-brand-text mb-4"><strong>Phone:</strong> +91 77599 02716</p>
+            <a href={`https://wa.me/${import.meta.env.VITE_WHATSAPP_NUMBER || '917759902716'}`} className="inline-block bg-green-500 text-white font-bold px-6 py-2 rounded-md hover:bg-green-600 transition-colors">
               Chat on WhatsApp
             </a>
           </div>

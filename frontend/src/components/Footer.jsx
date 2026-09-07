@@ -18,7 +18,7 @@ const Footer = () => {
         <div>
           <h3 className="text-lg font-bold text-white mb-4">Contact Us</h3>
           <p className="text-sm mb-2">Order easily via WhatsApp!</p>
-          <a href="https://wa.me/919876543210" className="inline-flex items-center text-white hover:text-brand-secondary transition-colors font-medium">
+          <a href={`https://wa.me/${import.meta.env.VITE_WHATSAPP_NUMBER || '917759902716'}`} className="inline-flex items-center text-white hover:text-brand-secondary transition-colors font-medium">
             Chat with us
           </a>
         </div>

@@ -26,9 +26,10 @@ const ProductDetail = () => {
   if (!product) return <div className="min-h-screen bg-brand-light flex items-center justify-center text-brand-dark text-xl font-bold">Product not found</div>;
   
   const handleWhatsApp = () => {
-    const message = `Hi, I'm interested in ordering: ${product.name} (₹${product.price}). Link: ${window.location.href}`;
-    window.open(`https://wa.me/919876543210?text=${encodeURIComponent(message)}`, '_blank');
-    // Optionally log click here
+    const message = `Hi, I'm interested in purchasing: ${product.name} (₹${product.price})`;
+    window.open(`https://wa.me/${import.meta.env.VITE_WHATSAPP_NUMBER || '917759902716'}?text=${encodeURIComponent(message)}`, '_blank');
+    
+    // Log the click here
     axios.post('/api/whatsapp-click', { productId: product._id }).catch(() => {});
   };
 
