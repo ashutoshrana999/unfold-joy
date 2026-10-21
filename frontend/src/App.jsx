@@ -4,6 +4,7 @@ import Footer from './components/Footer';
 import Home from './pages/Home';
 import ProductDetail from './pages/ProductDetail';
 import CategoryListing from './pages/CategoryListing';
+import Shop from './pages/Shop';
 import AdminLogin from './pages/Admin/AdminLogin';
 import Dashboard from './pages/Admin/Dashboard';
 import About from './pages/About';
@@ -17,6 +18,8 @@ function App() {
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/shop" element={<Shop />} />
+            <Route path="/categories" element={<Shop />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/category/:slug" element={<CategoryListing />} />

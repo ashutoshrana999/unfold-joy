@@ -34,8 +34,9 @@ const AdminLogin = () => {
   return (
     <div className="min-h-[80vh] flex items-center justify-center bg-brand-light py-12 px-4 sm:px-6 lg:px-8">
       <div className="max-w-md w-full space-y-8 bg-white p-10 rounded-xl shadow-lg border border-gray-100">
-        <div>
-          <h2 className="mt-6 text-center text-3xl font-extrabold text-brand-dark">Admin Login</h2>
+        <div className="text-center">
+          <img src="/logo.png" alt="Unfold Joy" className="h-14 mx-auto mb-3 object-contain" />
+          <h2 className="text-center text-3xl font-extrabold text-brand-dark">Admin Login</h2>
         </div>
         <form className="mt-8 space-y-6" onSubmit={handleLogin}>
           {error && <div className="text-red-500 text-sm text-center">{error}</div>}

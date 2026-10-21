@@ -29,15 +29,21 @@ const Contact = () => {
         
         <div className="space-y-8">
           <div className="bg-brand-light p-8 rounded-2xl border border-brand-secondary/50">
+            <img src="/logo.png" alt="Unfold Joy" className="h-12 w-auto object-contain mb-4" />
             <h3 className="text-xl font-bold text-brand-dark mb-2">Our Office</h3>
             <p className="text-brand-text">123 Joy Avenue, Happiness District<br />Mumbai, MH 400001<br />India</p>
           </div>
           <div className="bg-brand-light p-8 rounded-2xl border border-brand-secondary/50">
             <h3 className="text-xl font-bold text-brand-dark mb-2">Direct Contact</h3>
-            <p className="text-brand-text mb-2"><strong>Email:</strong> hello@unfoldjoy.com</p>
-            <p className="text-brand-text mb-4"><strong>Phone:</strong> +91 77599 02716</p>
-            <a href={`https://wa.me/${import.meta.env.VITE_WHATSAPP_NUMBER || '917759902716'}`} className="inline-block bg-green-500 text-white font-bold px-6 py-2 rounded-md hover:bg-green-600 transition-colors">
-              Chat on WhatsApp
+            <p className="text-brand-text mb-2"><strong>Email:</strong> <a href="mailto:unfoldjoy.29@gmail.com" className="hover:text-brand-cta transition-colors">unfoldjoy.29@gmail.com</a></p>
+            <p className="text-brand-text mb-4"><strong>Phone / WhatsApp:</strong> +91 96938 67664</p>
+            <a 
+              href={`https://wa.me/${import.meta.env.VITE_WHATSAPP_NUMBER || '919693867664'}?text=${encodeURIComponent("Hi UnfoldJoy! I have a question regarding an order.")}`} 
+              target="_blank" 
+              rel="noreferrer"
+              className="inline-flex items-center gap-2 bg-green-500 text-white font-bold px-6 py-2.5 rounded-xl hover:bg-green-600 transition-colors shadow-sm"
+            >
+              💬 Chat on WhatsApp
             </a>
           </div>
         </div>

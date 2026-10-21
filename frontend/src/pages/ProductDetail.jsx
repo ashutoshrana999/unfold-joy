@@ -27,7 +27,7 @@ const ProductDetail = () => {
   
   const handleWhatsApp = () => {
     const message = `Hi, I'm interested in purchasing: ${product.name} (₹${product.price})`;
-    window.open(`https://wa.me/${import.meta.env.VITE_WHATSAPP_NUMBER || '917759902716'}?text=${encodeURIComponent(message)}`, '_blank');
+    window.open(`https://wa.me/${import.meta.env.VITE_WHATSAPP_NUMBER || '919693867664'}?text=${encodeURIComponent(message)}`, '_blank');
     
     // Log the click here
     axios.post('/api/whatsapp-click', { productId: product._id }).catch(() => {});
