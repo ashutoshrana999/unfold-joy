@@ -31,39 +31,64 @@ app.use(
   })
 );
 
-// Security: Strict & Dynamic CORS Configuration (supports Vercel & custom domains)
+// Security: Dynamic CORS Configuration (supports unfoldjoy.in, Vercel & custom domains)
+const configuredClientUrls = (process.env.CLIENT_URL || '')
+  .split(',')
+  .map((u) => u.trim().replace(/\/+$/, ''))
+  .filter(Boolean);
+
 const allowedOrigins = [
   'http://localhost:5173',
   'http://localhost:5000',
   'http://127.0.0.1:5173',
   'http://127.0.0.1:5000',
-  process.env.CLIENT_URL
-].filter(Boolean);
+  'https://unfoldjoy.in',
+  'http://unfoldjoy.in',
+  'https://www.unfoldjoy.in',
+  'http://www.unfoldjoy.in',
+  'https://unfoldjoy.vercel.app',
+  ...configuredClientUrls
+];
+
+const isOriginAllowed = (origin) => {
+  if (!origin) return true; // Allow non-browser requests (mobile apps, server-to-server)
+  const cleanOrigin = origin.trim().replace(/\/+$/, '');
+  if (allowedOrigins.includes(cleanOrigin)) return true;
+
+  try {
+    const url = new URL(cleanOrigin);
+    const hostname = url.hostname.toLowerCase();
+
+    // Automatically allow custom domain unfoldjoy.in and all subdomains (e.g. www.unfoldjoy.in)
+    if (hostname === 'unfoldjoy.in' || hostname.endsWith('.unfoldjoy.in')) {
+      return true;
+    }
+
+    // Automatically allow Vercel production & preview deployments
+    if (hostname.endsWith('.vercel.app')) {
+      return true;
+    }
+  } catch (e) {
+    // invalid URL format
+  }
+
+  return false;
+};
 
 app.use(
   cors({
     origin: (origin, callback) => {
-      // Allow requests with no origin (like mobile apps, curl, or same-origin)
-      if (!origin) return callback(null, true);
-      
-      // Match explicit allowed origins
-      if (allowedOrigins.includes(origin)) return callback(null, true);
-
-      // Automatically allow Vercel production & preview deployments
-      try {
-        const url = new URL(origin);
-        if (url.hostname.endsWith('.vercel.app')) {
-          return callback(null, true);
-        }
-      } catch (e) {
-        // invalid URL format
+      if (isOriginAllowed(origin)) {
+        return callback(null, true);
       }
 
+      console.warn(`Blocked origin by CORS: ${origin}`);
       return callback(new Error('Blocked by CORS security policy'));
     },
     credentials: true,
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    allowedHeaders: ['Content-Type', 'Authorization'],
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin'],
+    optionsSuccessStatus: 204
   })
 );
 

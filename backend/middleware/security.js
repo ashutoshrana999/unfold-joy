@@ -1,9 +1,10 @@
 const rateLimit = require('express-rate-limit');
 
-// Strict rate limiter for admin login to prevent brute force and credential stuffing
+// Rate limiter for admin login to prevent brute force attacks
 const loginLimiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
-  max: 5, // Limit each IP to 5 login attempts per window
+  max: 20, // Allow up to 20 failed login attempts per 15 minutes
+  skipSuccessfulRequests: true, // Successful logins do not count toward rate limit
   standardHeaders: true, // Return rate limit info in the `RateLimit-*` headers
   legacyHeaders: false, // Disable the `X-RateLimit-*` headers
   message: {
