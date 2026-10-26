@@ -22,6 +22,12 @@ const ProductDetail = () => {
     fetchProduct();
   }, [slug]);
 
+  useEffect(() => {
+    if (product?.name) {
+      document.title = `${product.name} | Buy Online at UnfoldJoy Patna`;
+    }
+  }, [product]);
+
   if (loading) return <div className="min-h-screen bg-brand-light flex items-center justify-center">Loading...</div>;
   if (!product) return <div className="min-h-screen bg-brand-light flex items-center justify-center text-brand-dark text-xl font-bold">Product not found</div>;
   

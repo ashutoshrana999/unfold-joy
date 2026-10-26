@@ -30,6 +30,10 @@ const Shop = () => {
   const [viewMode, setViewMode] = useState('mixed'); // 'mixed' | 'by-category'
 
   useEffect(() => {
+    document.title = 'Shop Gifts, Earrings, Keyrings, Teddy Bears & Accessories | UnfoldJoy Patna';
+  }, []);
+
+  useEffect(() => {
     const fetchCatalog = async () => {
       setLoading(true);
       try {

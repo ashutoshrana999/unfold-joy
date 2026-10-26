@@ -92,4 +92,44 @@ const registerAdmin = async (req, res) => {
   }
 };
 
-module.exports = { loginAdmin, registerAdmin };
+const changePassword = async (req, res) => {
+  const { currentPassword, newPassword } = req.body;
+
+  if (typeof currentPassword !== 'string' || typeof newPassword !== 'string') {
+    return res.status(400).json({ message: 'Invalid input data format' });
+  }
+
+  const cleanCurrent = currentPassword.trim();
+  const cleanNew = newPassword.trim();
+
+  if (!cleanCurrent || !cleanNew) {
+    return res.status(400).json({ message: 'Current password and new password are required' });
+  }
+
+  if (cleanNew.length < 6) {
+    return res.status(400).json({ message: 'New password must be at least 6 characters long' });
+  }
+
+  try {
+    const admin = await Admin.findById(req.admin._id);
+    if (!admin) {
+      return res.status(404).json({ message: 'Admin account not found' });
+    }
+
+    const isMatch = await bcrypt.compare(cleanCurrent, admin.passwordHash);
+    if (!isMatch) {
+      return res.status(401).json({ message: 'Current password is incorrect' });
+    }
+
+    const salt = await bcrypt.genSalt(10);
+    admin.passwordHash = await bcrypt.hash(cleanNew, salt);
+    await admin.save();
+
+    res.json({ message: 'Password updated successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Failed to update password' });
+  }
+};
+
+module.exports = { loginAdmin, registerAdmin, changePassword };
+

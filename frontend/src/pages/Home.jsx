@@ -1,7 +1,22 @@
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { Sparkles, ArrowRight, ShoppingBag, Heart, ShieldCheck, Truck, Clock } from 'lucide-react';
+import { 
+  Sparkles, 
+  ArrowRight, 
+  ShoppingBag, 
+  Heart, 
+  ShieldCheck, 
+  Truck, 
+  Clock,
+  ChevronDown,
+  HelpCircle,
+  Gift,
+  MapPin,
+  CheckCircle2,
+  Star
+} from 'lucide-react';
+import InstagramIcon from '../components/InstagramIcon';
 
 const Home = () => {
   const [categories, setCategories] = useState([]);
@@ -10,6 +25,42 @@ const Home = () => {
   const [under199, setUnder199] = useState([]);
   const [settings, setSettings] = useState({ showUnder99: false, showUnder199: false });
   const [loading, setLoading] = useState(true);
+  const [openFaq, setOpenFaq] = useState(null);
+
+  const toggleFaq = (index) => {
+    setOpenFaq(openFaq === index ? null : index);
+  };
+
+  const faqItems = [
+    {
+      q: "What products does UnfoldJoy specialize in?",
+      a: "UnfoldJoy specializes in aesthetic earrings, stylish keyrings & charms, cuddly plush teddy bears, trendy Korean hair accessories, and personalized gift boxes curated to bring smiles."
+    },
+    {
+      q: "Are you located in Patna, and do you deliver across India?",
+      a: "Yes! UnfoldJoy is headquartered in Patna, Bihar. We offer priority dispatch within Patna city and provide reliable express courier delivery to all pin codes across India."
+    },
+    {
+      q: "How do I place an order via WhatsApp?",
+      a: "Ordering is simple and personalized! Click the 'Order on WhatsApp' button on any product or chat directly with us at +91 96938 67664. Our team assists you with customizations, packaging, and payment."
+    },
+    {
+      q: "Where can I view your latest designs and customer reviews?",
+      a: "Follow our official Instagram account @unfoldjoy.in (https://www.instagram.com/unfoldjoy.in). We post daily new arrivals, aesthetic packaging reels, customer unboxings, and feedback."
+    },
+    {
+      q: "Can I customize a gift hamper for birthdays or anniversaries in Patna?",
+      a: "Yes! We specialize in custom gifting. You can combine teddy bears, earrings, keyrings, and hair accessories with custom greeting notes and luxury ribbon wraps tailored to your budget."
+    },
+    {
+      q: "What are your delivery times and accepted payment methods?",
+      a: "Local Patna deliveries are fulfilled promptly, while orders across India typically take 3 to 5 business days with full tracking. We accept all major UPI options (GPay, PhonePe, Paytm) and Net Banking."
+    }
+  ];
+
+  useEffect(() => {
+    document.title = 'UnfoldJoy | Curated Gifts, Earrings, Keyrings & Teddy Bears in Patna & India';
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -91,7 +142,7 @@ const Home = () => {
         className="relative overflow-hidden py-16 md:py-24 border-b border-brand-secondary/30 bg-cover bg-center bg-no-repeat"
         style={{ backgroundImage: `url('/hero-bg.png')` }}
       >
-        {/* Soft elegant backdrop overlay for high legibility while letting the beautiful background shine */}
+        {/* Soft elegant backdrop overlay */}
         <div className="absolute inset-0 bg-white/70 backdrop-blur-[1px] pointer-events-none"></div>
         <div className="absolute inset-0 bg-gradient-to-b from-[#F7F2FF]/60 via-transparent to-[#F7F2FF]/80 pointer-events-none"></div>
 
@@ -100,51 +151,67 @@ const Home = () => {
           <div className="flex justify-center mb-5">
             <img 
               src="/logo.png" 
-              alt="Unfold Joy" 
+              alt="Unfold Joy - Gifts, Earrings, Keyrings & Teddy Bears in Patna" 
               className="h-16 sm:h-20 md:h-24 w-auto object-contain drop-shadow-sm transition-transform hover:scale-105"
             />
           </div>
 
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/90 backdrop-blur-md shadow-sm border border-brand-secondary/50 text-brand-dark text-xs sm:text-sm font-semibold mb-6">
-            <Sparkles className="w-4 h-4 text-brand-cta" />
-            <span>Unfold Moments of Pure Joy</span>
+          {/* SEO Badges */}
+          <div className="flex flex-wrap items-center justify-center gap-2 mb-6">
+            <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-white/95 backdrop-blur-md shadow-sm border border-brand-secondary/50 text-brand-dark text-xs font-bold">
+              <MapPin className="w-3.5 h-3.5 text-brand-cta" />
+              Patna City Gifting Studio
+            </span>
+            <span className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-white/95 backdrop-blur-md shadow-sm border border-brand-secondary/50 text-brand-dark text-xs font-bold">
+              <Truck className="w-3.5 h-3.5 text-green-600" />
+              Express Delivery Across India 🇮🇳
+            </span>
+            <a
+              href="https://www.instagram.com/unfoldjoy.in"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-gradient-to-r from-pink-500 via-purple-500 to-amber-500 text-white text-xs font-bold shadow-sm hover:opacity-95 transition-opacity"
+            >
+              <InstagramIcon className="w-3.5 h-3.5" />
+              @unfoldjoy.in
+            </a>
           </div>
 
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold mb-6 tracking-tight text-brand-dark max-w-4xl mx-auto leading-tight drop-shadow-sm">
-            Curated Gifts for Every <span className="text-brand-cta">Special Moment</span>
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold mb-5 tracking-tight text-brand-dark max-w-4xl mx-auto leading-tight drop-shadow-sm">
+            Curated Gifts, Earrings, Keyrings &amp; Teddy Bears <span className="text-brand-cta">in Patna &amp; Across India</span>
           </h1>
 
-          <p className="text-base sm:text-xl text-gray-700 mb-10 max-w-2xl mx-auto font-normal leading-relaxed bg-white/60 backdrop-blur-[2px] rounded-2xl py-2 px-4 border border-white/50">
-            Discover our handcrafted collections of jewelry, keepsakes, and heartwarming gifts
-            tailored to bring a bright smile to your loved ones.
+          <p className="text-sm sm:text-lg text-gray-700 mb-8 max-w-2xl mx-auto font-normal leading-relaxed bg-white/60 backdrop-blur-[2px] rounded-2xl py-2 px-4 border border-white/50">
+            Discover Patna’s favorite boutique for aesthetic jewelry, adorable plush teddy bears, trendy hair accessories, and bespoke gift hampers. Order seamlessly via WhatsApp!
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link
               to="/shop"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 bg-brand-cta text-white rounded-2xl font-bold text-lg hover:opacity-95 transition-all shadow-lg shadow-brand-cta/25 hover:shadow-xl hover:-translate-y-0.5"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-brand-cta text-white rounded-2xl font-bold text-base hover:opacity-95 transition-all shadow-lg shadow-brand-cta/25 hover:shadow-xl hover:-translate-y-0.5"
             >
               <ShoppingBag className="w-5 h-5" />
-              Explore All Items
+              Shop All Collections
             </Link>
             <a
-              href="#categories"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/90 backdrop-blur-md text-brand-dark rounded-2xl font-bold text-lg hover:bg-white border border-gray-200 transition-all shadow-sm"
+              href={`https://wa.me/${import.meta.env.VITE_WHATSAPP_NUMBER || '919693867664'}?text=${encodeURIComponent("Hi UnfoldJoy! I want to explore gifts and accessories.")}`}
+              target="_blank"
+              rel="noreferrer"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-8 py-3.5 bg-green-500 hover:bg-green-600 text-white rounded-2xl font-bold text-base transition-all shadow-md"
             >
-              Shop by Category
-              <ArrowRight className="w-5 h-5" />
+              <span>💬 Order on WhatsApp</span>
             </a>
           </div>
 
           {/* Quick value props */}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-16 max-w-3xl mx-auto pt-8 border-t border-brand-secondary/50 text-left">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mt-12 max-w-3xl mx-auto pt-8 border-t border-brand-secondary/50 text-left">
             <div className="flex items-center gap-3 bg-white/85 backdrop-blur-md p-3.5 rounded-2xl border border-white/70 shadow-sm">
               <div className="w-10 h-10 rounded-xl bg-brand-cta/10 shadow-sm flex items-center justify-center text-brand-cta flex-shrink-0">
                 <Heart className="w-5 h-5" />
               </div>
               <div>
                 <h4 className="text-xs sm:text-sm font-bold text-brand-dark">Handpicked with Love</h4>
-                <p className="text-[11px] sm:text-xs text-gray-600">Every item carefully chosen</p>
+                <p className="text-[11px] sm:text-xs text-gray-600">Curated in Patna, Bihar</p>
               </div>
             </div>
             <div className="flex items-center gap-3 bg-white/85 backdrop-blur-md p-3.5 rounded-2xl border border-white/70 shadow-sm">
@@ -153,7 +220,7 @@ const Home = () => {
               </div>
               <div>
                 <h4 className="text-xs sm:text-sm font-bold text-brand-dark">Assured Quality</h4>
-                <p className="text-[11px] sm:text-xs text-gray-600">Premium finishing always</p>
+                <p className="text-[11px] sm:text-xs text-gray-600">Premium finish &amp; packaging</p>
               </div>
             </div>
             <div className="flex items-center gap-3 col-span-2 md:col-span-1 bg-white/85 backdrop-blur-md p-3.5 rounded-2xl border border-white/70 shadow-sm">
@@ -161,10 +228,56 @@ const Home = () => {
                 <Truck className="w-5 h-5" />
               </div>
               <div>
-                <h4 className="text-xs sm:text-sm font-bold text-brand-dark">Swift Delivery</h4>
-                <p className="text-[11px] sm:text-xs text-gray-600">Fast dispatch & easy tracking</p>
+                <h4 className="text-xs sm:text-sm font-bold text-brand-dark">All-India Delivery</h4>
+                <p className="text-[11px] sm:text-xs text-gray-600">Fast shipping &amp; tracking</p>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Specialty Highlights (SEO Focus) */}
+      <section className="bg-white py-12 border-b border-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-8">
+            <span className="text-xs font-bold uppercase tracking-wider text-brand-cta block mb-1">
+              What We Curate
+            </span>
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-brand-dark">
+              Our Signature Specialties
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+            <Link to="/category/earrings" className="group p-4 bg-[#FAF7FD] rounded-2xl border border-brand-secondary/40 text-center hover:shadow-md transition-all">
+              <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">💎</div>
+              <h3 className="font-bold text-sm text-brand-dark group-hover:text-brand-cta">Aesthetic Earrings</h3>
+              <p className="text-[11px] text-gray-500 mt-1">Jhumkas, studs, hoops &amp; drops</p>
+            </Link>
+
+            <Link to="/shop?search=keyring" className="group p-4 bg-[#FAF7FD] rounded-2xl border border-brand-secondary/40 text-center hover:shadow-md transition-all">
+              <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">🔑</div>
+              <h3 className="font-bold text-sm text-brand-dark group-hover:text-brand-cta">Cute Keyrings</h3>
+              <p className="text-[11px] text-gray-500 mt-1">Trendy charms &amp; keepsakes</p>
+            </Link>
+
+            <Link to="/category/teddy-bears" className="group p-4 bg-[#FAF7FD] rounded-2xl border border-brand-secondary/40 text-center hover:shadow-md transition-all">
+              <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">🧸</div>
+              <h3 className="font-bold text-sm text-brand-dark group-hover:text-brand-cta">Plush Teddy Bears</h3>
+              <p className="text-[11px] text-gray-500 mt-1">Soft &amp; cuddly gift favorites</p>
+            </Link>
+
+            <Link to="/category/hair-accessories" className="group p-4 bg-[#FAF7FD] rounded-2xl border border-brand-secondary/40 text-center hover:shadow-md transition-all">
+              <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">🎀</div>
+              <h3 className="font-bold text-sm text-brand-dark group-hover:text-brand-cta">Hair Accessories</h3>
+              <p className="text-[11px] text-gray-500 mt-1">Korean clips, bows &amp; scrunchies</p>
+            </Link>
+
+            <Link to="/category/gift-box" className="group p-4 bg-[#FAF7FD] rounded-2xl border border-brand-secondary/40 text-center hover:shadow-md transition-all col-span-2 md:col-span-1">
+              <div className="text-3xl mb-2 group-hover:scale-110 transition-transform">🎁</div>
+              <h3 className="font-bold text-sm text-brand-dark group-hover:text-brand-cta">Custom Hampers</h3>
+              <p className="text-[11px] text-gray-500 mt-1">Curated boxes for any budget</p>
+            </Link>
           </div>
         </div>
       </section>
@@ -357,29 +470,151 @@ const Home = () => {
         </section>
       )}
 
-      {/* 6. WhatsApp Order & Assistance Banner */}
+      {/* Instagram Community Showcase */}
+      <section className="bg-gradient-to-r from-[#FAF5FF] via-[#FFF1F2] to-[#FFFBEB] py-16 border-y border-brand-secondary/30">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="bg-white rounded-3xl p-8 sm:p-12 shadow-sm border border-brand-secondary/30 flex flex-col md:flex-row items-center justify-between gap-8">
+            <div className="space-y-3 text-center md:text-left">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-pink-50 text-pink-600 text-xs font-bold">
+                <InstagramIcon className="w-3.5 h-3.5" />
+                <span>Instagram: @unfoldjoy.in</span>
+              </div>
+              <h2 className="text-2xl sm:text-3xl font-extrabold text-brand-dark">
+                See Our Latest Drops &amp; Packaging on Instagram
+              </h2>
+              <p className="text-sm sm:text-base text-gray-600 max-w-xl leading-relaxed">
+                Join our joyful community! Watch reel demos of our newest earrings, plush teddy bears, aesthetic keyrings, and heartwarming customer unboxings in Patna and across India.
+              </p>
+              <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 text-xs font-semibold text-gray-500 pt-2">
+                <span>✨ Daily New Arrivals</span>
+                <span>•</span>
+                <span>🎁 Aesthetic Packaging</span>
+                <span>•</span>
+                <span>⭐ Verified Customer Reviews</span>
+              </div>
+            </div>
+
+            <div className="flex-shrink-0">
+              <a
+                href="https://www.instagram.com/unfoldjoy.in"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-pink-500 via-purple-500 to-amber-500 hover:opacity-95 text-white font-bold text-base rounded-2xl shadow-lg hover:shadow-xl hover:-translate-y-0.5 transition-all"
+              >
+                <InstagramIcon className="w-5 h-5" />
+                <span>Follow @unfoldjoy.in</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 6. Interactive Q&A / FAQ Section (SEO Optimized) */}
+      <section id="faq" className="bg-brand-light py-16">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="text-center mb-12">
+            <span className="text-xs font-bold uppercase tracking-widest text-brand-cta bg-brand-secondary/30 px-3 py-1 rounded-full">
+              Frequently Asked Questions (Q&amp;A)
+            </span>
+            <h2 className="text-3xl sm:text-4xl font-extrabold text-brand-dark mt-3 tracking-tight">
+              Got Questions? We Have Answers!
+            </h2>
+            <p className="text-sm sm:text-base text-gray-600 mt-2">
+              Everything you need to know about our earrings, keyrings, teddy bears, and gifting in Patna &amp; across India.
+            </p>
+          </div>
+
+          <div className="space-y-4">
+            {faqItems.map((item, index) => {
+              const isOpen = openFaq === index;
+              return (
+                <div
+                  key={index}
+                  className="bg-white rounded-2xl border border-gray-200/80 shadow-sm overflow-hidden transition-all duration-200 hover:border-brand-cta/50"
+                >
+                  <button
+                    onClick={() => toggleFaq(index)}
+                    className="w-full text-left p-5 sm:p-6 flex items-center justify-between gap-4 font-bold text-sm sm:text-base text-brand-dark focus:outline-none"
+                    aria-expanded={isOpen}
+                  >
+                    <span className="flex items-center gap-3">
+                      <HelpCircle className="w-5 h-5 text-brand-cta shrink-0" />
+                      <span>{item.q}</span>
+                    </span>
+                    <ChevronDown
+                      className={`w-5 h-5 text-gray-400 shrink-0 transition-transform duration-300 ${
+                        isOpen ? 'rotate-180 text-brand-cta' : ''
+                      }`}
+                    />
+                  </button>
+
+                  {isOpen && (
+                    <div className="px-5 sm:px-6 pb-6 pt-1 text-sm text-gray-600 leading-relaxed border-t border-gray-50 bg-[#FAF8FE]/50">
+                      <p>{item.a}</p>
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* 7. Local Patna SEO Trust Block */}
+      <section className="bg-white py-14 border-t border-gray-100">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-center md:text-left">
+            <div className="p-6 bg-brand-light rounded-2xl border border-brand-secondary/30">
+              <MapPin className="w-8 h-8 text-brand-cta mb-3 mx-auto md:mx-0" />
+              <h3 className="font-extrabold text-brand-dark text-base mb-2">Patna City’s Favorite Boutique</h3>
+              <p className="text-xs text-gray-600 leading-relaxed">
+                Based right here in Patna, Bihar. We provide speedy local dispatch, customized gift boxes for loved ones, and personalized client support.
+              </p>
+            </div>
+
+            <div className="p-6 bg-brand-light rounded-2xl border border-brand-secondary/30">
+              <Truck className="w-8 h-8 text-brand-cta mb-3 mx-auto md:mx-0" />
+              <h3 className="font-extrabold text-brand-dark text-base mb-2">Nationwide Express Delivery</h3>
+              <p className="text-xs text-gray-600 leading-relaxed">
+                Sending a surprise from Patna to Delhi, Mumbai, Bengaluru, or anywhere in India? We ship securely with tracked express delivery nationwide.
+              </p>
+            </div>
+
+            <div className="p-6 bg-brand-light rounded-2xl border border-brand-secondary/30">
+              <Gift className="w-8 h-8 text-brand-cta mb-3 mx-auto md:mx-0" />
+              <h3 className="font-extrabold text-brand-dark text-base mb-2">Curated Gifting &amp; Keepsakes</h3>
+              <p className="text-xs text-gray-600 leading-relaxed">
+                Handcrafted earrings, stylish keyrings, lovable teddy bears, and aesthetic hair accessories packed in ready-to-gift luxury parcel boxes.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 8. WhatsApp Order & Assistance Banner */}
       <section className="bg-gradient-to-r from-brand-dark via-[#6F4794] to-brand-dark py-14 text-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col md:flex-row items-center justify-between gap-8 bg-white/10 backdrop-blur-md p-8 sm:p-10 rounded-3xl border border-white/20">
             <div className="space-y-3 text-center md:text-left">
               <div className="flex items-center justify-center md:justify-start gap-3">
-                <img src="/logo-white.png" alt="Unfold Joy" className="h-9 w-auto object-contain" />
+                <img src="/logo-white.png" alt="Unfold Joy Patna" className="h-9 w-auto object-contain" />
               </div>
               <h2 className="text-2xl sm:text-3xl font-extrabold tracking-tight">
                 Looking for Custom Gifting or Quick Orders?
               </h2>
               <p className="text-brand-secondary text-sm sm:text-base max-w-xl">
-                Chat with us directly on WhatsApp for personalized recommendations, custom gift hampers, or instant order assistance.
+                Chat with us directly on WhatsApp for personalized recommendations, custom gift hampers in Patna, or instant order assistance.
               </p>
               <div className="flex flex-wrap items-center justify-center md:justify-start gap-4 text-xs sm:text-sm text-brand-secondary pt-1">
                 <span>📱 <strong>WhatsApp:</strong> +91 96938 67664</span>
+                <span>📸 <strong>Instagram:</strong> @unfoldjoy.in</span>
                 <span>✉️ <strong>Email:</strong> unfoldjoy.29@gmail.com</span>
               </div>
             </div>
 
             <div className="flex-shrink-0">
               <a
-                href={`https://wa.me/${import.meta.env.VITE_WHATSAPP_NUMBER || '919693867664'}?text=${encodeURIComponent("Hi UnfoldJoy! I want to place an order.")}`}
+                href={`https://wa.me/${import.meta.env.VITE_WHATSAPP_NUMBER || '919693867664'}?text=${encodeURIComponent("Hi UnfoldJoy! I want to place an order or customize a gift.")}`}
                 target="_blank"
                 rel="noreferrer"
                 className="inline-flex items-center gap-3 px-8 py-4 bg-green-500 hover:bg-green-600 text-white rounded-2xl font-bold text-base transition-all shadow-lg hover:shadow-xl hover:-translate-y-0.5"

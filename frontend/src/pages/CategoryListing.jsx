@@ -36,6 +36,12 @@ const CategoryListing = () => {
 
   const categoryName = category?.name || slug?.replace(/-/g, ' ');
 
+  useEffect(() => {
+    if (categoryName) {
+      document.title = `${categoryName} Collection | UnfoldJoy Patna - Curated Gifts`;
+    }
+  }, [categoryName]);
+
   const handleWhatsAppInquiry = () => {
     const whatsappNum = import.meta.env.VITE_WHATSAPP_NUMBER || '919693867664';
     const message = `Hi UnfoldJoy! I noticed the ${categoryName} collection is coming soon. Please let me know when it launches or if you have custom pieces available!`;

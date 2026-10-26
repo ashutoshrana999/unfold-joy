@@ -1,78 +1,141 @@
 import { Link } from 'react-router-dom';
+import { MapPin, Truck, MessageCircle, Mail, Phone } from 'lucide-react';
+import InstagramIcon from './InstagramIcon';
 
 const Footer = () => {
   return (
-    <footer className="bg-brand-dark text-brand-secondary py-12 border-t border-white/10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-8">
-        <div className="md:col-span-2">
+    <footer className="bg-brand-dark text-brand-secondary py-14 border-t border-white/10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 grid grid-cols-1 md:grid-cols-4 gap-10">
+        {/* Brand & Local Focus Column */}
+        <div className="md:col-span-1">
           <Link to="/" className="inline-block mb-3">
             <img
               src="/logo-white.png"
-              alt="Unfold Joy"
+              alt="Unfold Joy - Curated Gifts in Patna & India"
               className="h-10 w-auto object-contain"
             />
           </Link>
-          <p className="text-sm text-brand-secondary/80 max-w-sm leading-relaxed mb-4">
-            Bringing moments of sheer joy with every gift. We curate the best jewelry, keepsakes,
-            and heartwarming presents just for you and your loved ones.
+          <p className="text-xs text-brand-secondary/80 leading-relaxed mb-4">
+            Curated gifting boutique bringing joyful moments with every parcel. Specializing in aesthetic earrings, keyrings, cuddly teddy bears, hair accessories, and bespoke gift hampers.
           </p>
-          <div className="text-xs text-brand-secondary/90 space-y-1">
-            <p><span className="text-white font-medium">WhatsApp / Phone:</span> +91 96938 67664</p>
-            <p><span className="text-white font-medium">Email:</span> <a href="mailto:unfoldjoy.29@gmail.com" className="hover:text-white transition-colors">unfoldjoy.29@gmail.com</a></p>
+          <div className="space-y-1.5 text-xs text-brand-secondary/90">
+            <div className="flex items-center gap-2 text-white font-medium">
+              <MapPin className="w-3.5 h-3.5 text-brand-cta shrink-0" />
+              <span>Patna City, Bihar (HQ)</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Truck className="w-3.5 h-3.5 text-brand-cta shrink-0" />
+              <span>Pan-India Courier Delivery 🇮🇳</span>
+            </div>
           </div>
         </div>
 
+        {/* Popular Categories (SEO Rich Links) */}
         <div>
-          <h3 className="text-base font-bold text-white mb-4 uppercase tracking-wider text-xs">
-            Quick Navigation
+          <h3 className="text-white font-bold mb-4 uppercase tracking-wider text-xs">
+            Trending Gifting
           </h3>
-          <ul className="space-y-2 text-sm">
+          <ul className="space-y-2 text-xs">
             <li>
-              <Link to="/" className="text-brand-secondary hover:text-white transition-colors">
-                Home
+              <Link to="/category/earrings" className="text-brand-secondary/90 hover:text-white transition-colors">
+                • Aesthetic Earrings & Jhumkas
               </Link>
             </li>
             <li>
-              <Link to="/shop" className="text-brand-secondary hover:text-white transition-colors">
-                Shop All Collections
+              <Link to="/shop?search=keyring" className="text-brand-secondary/90 hover:text-white transition-colors">
+                • Stylish Keyrings & Charms
               </Link>
             </li>
             <li>
-              <Link to="/about" className="text-brand-secondary hover:text-white transition-colors">
-                About Us
+              <Link to="/category/teddy-bears" className="text-brand-secondary/90 hover:text-white transition-colors">
+                • Soft Plush Teddy Bears
               </Link>
             </li>
             <li>
-              <Link to="/contact" className="text-brand-secondary hover:text-white transition-colors">
-                Contact & Support
+              <Link to="/category/hair-accessories" className="text-brand-secondary/90 hover:text-white transition-colors">
+                • Korean Hair Accessories & Clips
+              </Link>
+            </li>
+            <li>
+              <Link to="/category/gift-box" className="text-brand-secondary/90 hover:text-white transition-colors">
+                • Custom Gift Boxes & Hampers
               </Link>
             </li>
           </ul>
         </div>
 
+        {/* Quick Navigation */}
         <div>
-          <h3 className="text-base font-bold text-white mb-4 uppercase tracking-wider text-xs">
-            WhatsApp Orders
+          <h3 className="text-white font-bold mb-4 uppercase tracking-wider text-xs">
+            Quick Links
           </h3>
-          <p className="text-sm text-brand-secondary/80 mb-3">
-            Direct customer assistance and instant checkout on WhatsApp!
-          </p>
-          <p className="text-xs text-white font-semibold mb-3">
-            📱 +91 96938 67664
+          <ul className="space-y-2 text-xs">
+            <li>
+              <Link to="/" className="text-brand-secondary/90 hover:text-white transition-colors">
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link to="/shop" className="text-brand-secondary/90 hover:text-white transition-colors">
+                Shop All Collections
+              </Link>
+            </li>
+            <li>
+              <Link to="/about" className="text-brand-secondary/90 hover:text-white transition-colors">
+                About UnfoldJoy Patna
+              </Link>
+            </li>
+            <li>
+              <Link to="/contact" className="text-brand-secondary/90 hover:text-white transition-colors">
+                Contact & Custom Orders
+              </Link>
+            </li>
+          </ul>
+        </div>
+
+        {/* Instagram & WhatsApp Connect */}
+        <div>
+          <h3 className="text-white font-bold mb-4 uppercase tracking-wider text-xs">
+            Connect & Order
+          </h3>
+          <p className="text-xs text-brand-secondary/80 mb-3 leading-relaxed">
+            Follow our daily stories, unboxing videos, and new drops on Instagram:
           </p>
           <a
-            href={`https://wa.me/${import.meta.env.VITE_WHATSAPP_NUMBER || '919693867664'}?text=${encodeURIComponent("Hi UnfoldJoy! I have an inquiry about your products.")}`}
+            href="https://www.instagram.com/unfoldjoy.in"
             target="_blank"
-            rel="noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-brand-cta text-white font-bold text-xs uppercase tracking-wider hover:opacity-90 transition-opacity shadow-md"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-3.5 py-2 mb-3 rounded-xl bg-gradient-to-r from-pink-500 via-purple-500 to-amber-500 text-white font-bold text-xs hover:opacity-95 transition-opacity shadow-sm"
           >
-            Chat & Order on WhatsApp
+            <InstagramIcon className="w-4 h-4" />
+            <span>@unfoldjoy.in</span>
           </a>
+
+          <div className="pt-2 text-xs space-y-1.5 border-t border-white/10 mt-2">
+            <p className="text-white font-medium flex items-center gap-1.5">
+              <Phone className="w-3 h-3 text-brand-cta" /> +91 96938 67664
+            </p>
+            <p className="text-brand-secondary/80 flex items-center gap-1.5">
+              <Mail className="w-3 h-3 text-brand-cta" /> unfoldjoy.29@gmail.com
+            </p>
+          </div>
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-10 pt-8 border-t border-white/10 text-xs text-brand-secondary/60 text-center">
-        &copy; {new Date().getFullYear()} UnfoldJoy. All rights reserved. Handcrafted with care.
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-brand-secondary/60">
+        <p>&copy; {new Date().getFullYear()} UnfoldJoy. All rights reserved. Handcrafted & Curated in Patna, Bihar.</p>
+        <div className="flex items-center gap-4">
+          <a
+            href="https://www.instagram.com/unfoldjoy.in"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-white transition-colors flex items-center gap-1"
+          >
+            <InstagramIcon className="w-3.5 h-3.5" /> Instagram: unfoldjoy.in
+          </a>
+          <span>•</span>
+          <span className="text-brand-secondary/80">Delivering Pan-India 🇮🇳</span>
+        </div>
       </div>
     </footer>
   );

@@ -33,6 +33,8 @@ UnfoldJoy is a modern, responsive e-commerce platform designed for curated gifti
      PORT=5000
      MONGO_URI=your_mongodb_connection_string
      JWT_SECRET=your_jwt_secret_key
+     ADMIN_EMAIL=admin@unfoldjoy.com
+     ADMIN_PASSWORD=your_strong_admin_password
      WHATSAPP_NUMBER=919693867664
      ```
    - In `frontend/.env`:
@@ -42,7 +44,15 @@ UnfoldJoy is a modern, responsive e-commerce platform designed for curated gifti
      VITE_CONTACT_EMAIL=unfoldjoy.29@gmail.com
      ```
 
-3. **Start Development**
+3. **Admin Account Setup & Password Management**
+   - Set or reset the admin password directly via CLI without exposing credentials in Git:
+     ```bash
+     cd backend
+     node setAdmin.js admin@unfoldjoy.com mySecurePassword123
+     ```
+   - Or change it anytime from the web UI by logging into `/admin/dashboard` and clicking **Change Password**.
+
+4. **Start Development**
    - Backend:
      ```bash
      cd backend && npm run dev

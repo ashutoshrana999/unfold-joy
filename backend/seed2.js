@@ -12,16 +12,22 @@ const seedData = async () => {
     await mongoose.connect(MONGO_URI);
     console.log('MongoDB Connected for Seeding');
 
-    // 1. Create Admin
-    await Admin.deleteMany();
-    const salt = await bcrypt.genSalt(10);
-    const passwordHash = await bcrypt.hash('admin123', salt);
-    await Admin.create({
-      name: 'Admin',
-      email: 'admin@unfoldjoy.com',
-      passwordHash
-    });
-    console.log('Admin seeded (admin@unfoldjoy.com / admin123).');
+    // 1. Create or Update Admin (reads from environment variables)
+    const adminEmail = (process.env.ADMIN_EMAIL || 'admin@unfoldjoy.com').trim().toLowerCase();
+    const adminPassword = process.env.ADMIN_PASSWORD;
+
+    if (adminPassword) {
+      const salt = await bcrypt.genSalt(10);
+      const passwordHash = await bcrypt.hash(adminPassword.trim(), salt);
+      await Admin.findOneAndUpdate(
+        { email: adminEmail },
+        { name: 'Admin', email: adminEmail, passwordHash },
+        { upsert: true, new: true }
+      );
+      console.log(`Admin account initialized/updated for: ${adminEmail}`);
+    } else {
+      console.log('ℹ️  ADMIN_PASSWORD is not set in .env. Existing admin accounts are preserved. (Run "node setAdmin.js" to create or update an admin).');
+    }
 
     // Clear existing products and categories
     await Category.deleteMany();
