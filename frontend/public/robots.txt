@@ -3,4 +3,4 @@ Allow: /
 Disallow: /admin/
 Disallow: /api/admin/
 
-Sitemap: https://unfoldjoy.vercel.app/sitemap.xml
+Sitemap: https://unfoldjoy.in/sitemap.xml
